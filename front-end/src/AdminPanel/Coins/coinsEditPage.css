@@ -1,0 +1,107 @@
+.admin-coins {
+    margin-top: 40px;
+}
+
+.change-box {
+    display: flex;
+    gap: 30px;
+}
+
+.change-box div {
+    width: 120px;
+    height: 48px;
+    background: #E5E5E5;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    padding-block: 16px;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+}
+
+.admin-coins-add {
+    margin-top: 25px;
+    display: flex;
+    gap: 30px;
+}
+
+.admin-coins-add div {
+    width: 120px;
+    height: 120px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.admin-coins-add p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-decoration-line: underline;
+    color: #000000;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .change-box {
+        gap: 20px; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+
+    .change-box div {
+        width: 100px; 
+        height: 40px; 
+        font-size: 12px; 
+    }
+
+    .admin-coins-add {
+        gap: 20px; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+    }
+
+    .admin-coins-add div {
+        width: 100px; 
+        height: 100px; 
+        font-size: 20px; 
+    }
+
+    .admin-coins-add p {
+        font-size: 12px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .change-box {
+        gap: 15px; 
+    }
+
+    .change-box div {
+        width: 80px; 
+        height: 32px; 
+        font-size: 10px; 
+    }
+
+    .admin-coins-add div {
+        width: 80px;
+        height: 80px; 
+        font-size: 16px; 
+    }
+
+    .admin-coins-add p {
+        font-size: 10px; 
+    }
+}

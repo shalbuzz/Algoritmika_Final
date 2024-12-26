@@ -1,0 +1,198 @@
+import { useEffect, useState } from "react";
+import getCoins from "../../Requests/getCoins";
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import "./listOfCoins.css"
+import SearchComponent from "../../SearchComponent/SearchComponent";
+
+
+const ListOfCoins = () => {
+    const params = useParams()
+    const { id }= params
+    const [coins, setCoins] = useState([])
+    const navigate=useNavigate()
+    const [urlSearch,setUrlSearch]=useSearchParams()
+    const searchData=[...urlSearch.entries()]
+    const location=useLocation()
+
+    
+    console.log("urlSearch: ",urlSearch.toString())
+    console.log("location: ", location)
+  
+    
+       
+    const submitHandler=(values)=>{
+        setUrlSearch(values,{
+            replace: true
+        })
+    }
+    
+    useEffect(() => {
+        if(id && !urlSearch.toString().length){
+            getCoins(id).then(data => {
+                const categoryArr=[]
+                data.forEach(item=>{
+                    const {id,title,image,about}=item
+                    categoryArr.push({
+                        id,
+                        title,
+                        about,
+                        image
+                    })
+                })
+                setCoins(categoryArr)
+            })
+        }else{
+            navigate({
+                pathname:'/listOfCoins',
+                search: location.search
+            },
+            {
+                replace:true
+            })
+            getCoins('',urlSearch.toString()).then(data=>{
+                const searchCoinsArr=[]
+                data.forEach(item=>{
+                    const {id,title,about,image,coin_id,}=item
+                    searchCoinsArr.push({
+                        id,
+                        title,
+                        about,
+                        image,
+                        coin_id
+                    })
+                })
+                setCoins(searchCoinsArr)
+            })
+        }
+    }, [urlSearch])
+
+    const handleBack = () => {
+        navigate('/')
+    }
+    
+    return (
+        <div>
+            <h1 className="homepage-title">List of the coins</h1>
+            <p className="back-homePage"><span onClick={handleBack}>Homepage</span>— List of the coins</p>
+            <SearchComponent submitHandler={(formValues)=>submitHandler(formValues)} searchListData={searchData}/>
+            <div className="coins">
+                {
+                    coins.map(item => (
+                        <Link to={(id && !urlSearch.toString().length) ? `/coin/${item.id}`: `/coin/${item.coin_id}`}>
+                            <div className="coin" key={item.id}>
+                                <div>
+                                    <img src={item.image} alt="CoinImage" className="coin-image"/>
+                                </div>
+                                <div className="coin-text">
+                                    <p className="coin-title">{item.title}</p>
+                                    <p className="coin-des">{item.about}</p>
+                                </div>
+                            </div>
+                        </Link>
+
+                    ))
+                }
+            </div>
+        </div>
+    );
+}
+
+export default ListOfCoins;
+
+// import { useEffect, useState } from "react";
+// import getCoins from "../../Requests/getCoins";
+// import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+// import "./listOfCoins.css";
+// import SearchComponent from "../../SearchComponent/SearchComponent";
+
+// const ListOfCoins = () => {
+//     const { id } = useParams();
+//     const [coins, setCoins] = useState([]);
+//     const navigate = useNavigate();
+//     const [urlSearch, setUrlSearch] = useSearchParams();
+//     const searchData = [...urlSearch.entries()];
+//     const location = useLocation();
+
+//     console.log("urlSearch:", urlSearch.toString());
+//     console.log("location:", location);
+
+//     const submitHandler = (values) => {
+//         setUrlSearch(values, {
+//             replace: true,
+//         });
+//     };
+
+//     useEffect(() => {
+//         if (id && !urlSearch.toString().length) {
+//             getCoins(id).then(data => {
+//                 const categoryArr = data.map(item => {
+//                     const { id, title, image, about } = item;
+//                     return { id, title, about, image };
+//                 });
+//                 setCoins(categoryArr);
+//             });
+//         } else {
+//             navigate({
+//                 pathname: '/listOfCoins',
+//                 search: location.search,
+//             }, {
+//                 replace: true,
+//             });
+
+//             getCoins('', urlSearch.toString()).then(data => {
+//                 const searchCoinsArr = data.map(item => {
+//                     const { id, title, about, image, coin_id } = item;
+//                     return { id, title, about, image, coin_id };
+//                 });
+//                 setCoins(searchCoinsArr);
+//             });
+//         }
+//     }, [id, urlSearch, navigate, location]);
+
+//     const handleBack = () => {
+//         navigate('/');
+//     };
+
+//     return (
+//         <div>
+//             <h1 className="homepage-title">List of the Coins</h1>
+//             <p className="back-homePage">
+//                 <span onClick={handleBack}>Homepage</span> — List of the Coins
+//             </p>
+
+//             {/* Search Component */}
+//             <SearchComponent
+//                 submitHandler={(formValues) => submitHandler(formValues)}
+//                 searchListData={searchData}
+//             />
+
+//             {/* Coins List */}
+//             <div className="coins">
+//                 {coins.map(item => (
+//                     <Link
+//                         to={(id && !urlSearch.toString().length)
+//                             ? `/coin/${item.id}`
+//                             : `/coin/${item.coin_id}`}
+//                         key={item.id}
+//                     >
+//                         <div className="coin">
+//                             <div>
+//                                 <img
+//                                     src={item.image}
+//                                     alt="CoinImage"
+//                                     className="coin-image"
+//                                 />
+//                             </div>
+//                             <div className="coin-text">
+//                                 <p className="coin-title">{item.title}</p>
+//                                 <p className="coin-des">{item.about}</p>
+//                             </div>
+//                         </div>
+//                     </Link>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default ListOfCoins;
