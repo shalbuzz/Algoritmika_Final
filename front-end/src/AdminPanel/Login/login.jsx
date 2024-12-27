@@ -163,6 +163,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login as loginAction } from "../../Redux/userSlice";
 import login from "../../Requests/login";
+import { useSelector } from "react-redux";
 import "./login.css";
 
 const LoginPage = () => {
@@ -172,8 +173,8 @@ const LoginPage = () => {
     
     const [wrongLogin, setWrongLogin] = useState("");
     const [loginForm, setLoginForm] = useState({
-        email: "admin@gmail.com",
-        password: "admin54321",
+        email: "aliverdiyev05@inbox.ru",
+        password: "shalbuz10",
     });
 
     const LoginHandler = async (e) => {
@@ -208,13 +209,13 @@ const LoginPage = () => {
                     <div className="login-input">
                         <label>
                             <p>Login</p>
-                            <input type="email" name="email" value={loginForm.email} />
+                            <input onChange={changeHandler}  type="email" name="email" value={loginForm.email} />
                         </label>
                     </div>
                     <div className="login-input">
                         <label>
                             <p>Password</p>
-                            <input type="password" name="password" value={loginForm.password} />
+                            <input onChange={changeHandler} type="password" name="password" value={loginForm.password} />
                         </label>
                     </div>
                     <div className="login-submit">

@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes,} from 'react-router-dom';
 import ListOfCoins from './Pages/ListOfCoins/ListOfCoins';
 import CoinDetails from './Pages/CoinDescription/CoinDescription';
 import LoginPage from './AdminPanel/Login/login';
-//import UserContextProvider from './context/userContext/userContext';
 import AdminPanel from './AdminPanel/AdminIndex';
 
 const App = ()=>{

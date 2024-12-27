@@ -29,11 +29,13 @@
 
 .search-btn {
     width: 120px;
-    height: 48px;
+    height: 47px;
     background: #833AE0;
     border: none;
     cursor: pointer;
     color: white;
+    padding-top: 3px;
+    font-size: 14px;
 }
 .toggle-advanced-filter{
     font-family: 'Roboto';

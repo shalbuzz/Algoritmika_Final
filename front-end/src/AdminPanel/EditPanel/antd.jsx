@@ -37,7 +37,7 @@ const Apps = () => {
       return;
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
+    
       getBase64(info.file.originFileObj, (url) => {
         setLoading(false);
         setImageUrl(url);

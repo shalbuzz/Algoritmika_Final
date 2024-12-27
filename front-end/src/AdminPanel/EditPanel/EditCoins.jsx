@@ -6,9 +6,7 @@
         import getCoinDetails from '../../Requests/getDetails';
         import editCoin from '../../Requests/edit';
         import { Upload } from 'antd';
-        //import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-        //import { storage } from '../../../firebase';
-
+        
         const CoinEditPage = () => {
 
     const coinTable = ['title', 'about', 'image', 'category_id']
@@ -197,20 +195,20 @@
         <div className='first-col' >
         <label>
             <p>Coin name</p>
-            <input value={coinData.title} className='edit-input' name='title' />
+            <input onChange={changeHandler} value={coinData.title || ''} className='edit-input' name='title' />
         </label>
         <label>
             <p>Face value</p>
-            <input value={coinData.denomination} className='edit-input' name='denomination' />
+            <input onChange={changeHandler} value={coinData.denomination} className='edit-input' name='denomination' />
         </label>
         <label>
             <p>Year of issue</p>
-            <input value={coinData.year} type="number" className='edit-input' name='year' />
+            <input   onChange={changeHandler} value={coinData.year} type="number" className='edit-input' name='year' />
         </label>
         <label>
             <p>Price</p>
-            <input value={coinData.price} type="number" className='edit-input small-input' name='price' />
-            <select value={coinData.currency_symbol} className='edit-input small-select' name='currency_symbol'>
+            <input   onChange={changeHandler} value={coinData.price} type="number" className='edit-input small-input' name='price' />
+            <select   onChange={changeHandler} value={coinData.currency_symbol} className='edit-input small-select' name='currency_symbol'>
                 <option value="$">$</option>
                 <option value="€">€</option>
                 <option value="£">£</option>
@@ -221,30 +219,30 @@
         </label>
         <label>
             <p>Country</p>
-            <input value={coinData.issuing_country} className='edit-input' name='issuing_country' />
+            <input   onChange={changeHandler} value={coinData.issuing_country} className='edit-input' name='issuing_country' />
         </label>
         <label>
             <p>Metal</p>
-            <input value={coinData.composition} className='edit-input' name='composition' />
+            <input   onChange={changeHandler} value={coinData.composition} className='edit-input' name='composition' />
         </label>
         </div>
         <div className='second-col'>
         <label>
             <p>Short description</p>
-            <textarea value={coinData.about} className='edit-input edit-textarea' name='about' />
+            <textarea   onChange={changeHandler} value={coinData.about} className='edit-input edit-textarea' name='about' />
         </label>
         <label>
             <p>Long description</p>
-            <textarea value={coinData.description} className='edit-input edit-textarea' name='description' />
+            <textarea   onChange={changeHandler} value={coinData.description} className='edit-input edit-textarea' name='description' />
         </label>
         <label>
             <p>Quality of the coin</p>
-            <input value={coinData.quality} className='edit-input' name='quality' />
+            <input   onChange={changeHandler} value={coinData.quality} className='edit-input' name='quality' />
         </label>
         <label>
             <p>Weight</p>
-            <input value={coinData.weight} className='edit-input small-input' name='weight' type='number' />
-            <select value={coinData.weight_symbol} className='edit-input small-select' name='weight_symbol'>
+            <input   onChange={changeHandler} value={coinData.weight} className='edit-input small-input' name='weight' type='number' />
+            <select   onChange={changeHandler} value={coinData.weight_symbol} className='edit-input small-select' name='weight_symbol'>
                 <option value='g'>g</option>
                 <option value='mg'>mg</option>
             </select>
@@ -256,11 +254,11 @@
                 <>
                     <label>
                         <p>Link to obverse image</p>
-                        <input value={coinData.image} className='edit-input' name='image' />
+                        <input onChange={changeHandler} value={coinData.image} className='edit-input' name='image' />
                     </label>
                     <label>
                         <p>Link to reverse image</p>
-                        <input value={coinData.back_image} className='edit-input' name='back_image' />
+                        <input onChange={changeHandler} value={coinData.back_image} className='edit-input' name='back_image' />
                     </label>
                 </>
             ) : (
@@ -277,7 +275,7 @@
                             className="avatar-uploader"
                             showUploadList={false}
                             action=""
-                            // beforeUpload={beforeUpload}
+                           
                             onChange={(e) => handleUploadImage(e, 'front')}
                         >
                             {coinData?.image ? (
@@ -307,7 +305,7 @@
                             className="avatar-uploader"
                             showUploadList={false}
                             action=""
-                            // beforeUpload={beforeUpload}
+                           
                             onChange={(e) => handleUploadImage(e, 'reverse')}
                         >
                             {coinData?.back_image ? (
@@ -331,7 +329,7 @@
         }
         <label>
             <p>Category id</p>
-            <select value={coinData.category_id} className='edit-input edit-select' name='category_id'>
+            <select   onChange={changeHandler} value={coinData.category_id} className='edit-input edit-select' name='category_id'>
                 <option value=''>Select category</option>
                 {
                     categories?.map((categories) => (

@@ -12,3 +12,5 @@ const SearchBox = ({formValues}) => {
 }
  
 export default SearchBox;
+
+

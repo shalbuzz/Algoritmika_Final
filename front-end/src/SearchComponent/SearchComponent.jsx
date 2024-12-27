@@ -8,7 +8,7 @@ import getComposition from '../Requests/getComposition';
 
 
 
-const SearchComponent = ({ submitHandler, searchListData }) => {
+const SearchComponent = ({ submitHandler, searchListData, toggleCategories  }) => {
     const [countries, setCountries] = useState([])
     const [compositions, setComposition] = useState([])
     const [qualities, setQuailties] = useState([])
@@ -65,11 +65,21 @@ const SearchComponent = ({ submitHandler, searchListData }) => {
         submitHandler(resultData)
     }
 
+    // const toggleFilter = () => {
+    //     console.log('Filter toggle clicked');
+    //     setFilterShow(!filterShow); // Переключаем состояние фильтра
+    //     if (toggleCategories) {
+    //         console.log('toggleCategories called');
+    //         toggleCategories(); // Скрываем или показываем категории
+    //     } else {
+    //         console.error('toggleCategories is not passed to SearchComponent');
+    //     }
+    // };
 
     return (
         <form onChange={onChangeForm} onSubmit={onSumbitForm}>
             <SearchBox formValues={formValues.search} />
-            <div onClick={() => setFilterShow(!filterShow)} className='toggle-advanced-filter'>
+            <div onClick={() => setFilterShow(!filterShow)}  className='toggle-advanced-filter'>
                 <span>Advanced filter</span>
                 <ToggleAdvancedFilterIcon isClosed={!filterShow} />
             </div>
@@ -78,7 +88,7 @@ const SearchComponent = ({ submitHandler, searchListData }) => {
                     <div className='advanced-label-box'>
                         <label >
                             <p className='filter-title'>Issuing country</p>
-                            <select className='filter-select' name='country' value={formValues.country}>
+                            <select onChange={onChangeForm} className='filter-select' name='country' value={formValues.country}>
                             <option value={''} >Select a country</option>
                                 {
                                     countries.map((country, index) => (
@@ -91,7 +101,7 @@ const SearchComponent = ({ submitHandler, searchListData }) => {
                     <div className='advanced-label-box'>
                         <label>
                             <p className='filter-title'>Metal</p>
-                            <select className='filter-select' name='metal' value={formValues.metal}>
+                            <select onChange={onChangeForm} className='filter-select' name='metal' value={formValues.metal}>
                                 <option value={''} >Select a metal</option>
                                 {
                                     compositions.map((compositions,index)=>(
@@ -104,7 +114,7 @@ const SearchComponent = ({ submitHandler, searchListData }) => {
                     <div className='advanced-label-box'>
                         <label>
                             <p className='filter-title'>Quality of the coin</p>
-                            <select className='filter-select' name='quality' value={formValues.quality}>
+                            <select onChange={onChangeForm} className='filter-select' name='quality' value={formValues.quality}>
                                 <option value=''>Select a quality</option>
                                 {
                                     qualities.map((qualities,index)=>(
@@ -120,18 +130,18 @@ const SearchComponent = ({ submitHandler, searchListData }) => {
                         <label>
                             <p className='filter-title'> Price</p>
                             <span>from </span>
-                            <input type="number" className='filter-input' name='fromPrice' value={formValues.fromPrice} />
+                            <input onChange={onChangeForm} type="number" className='filter-input' name='fromPrice' value={formValues.fromPrice} />
                             <span>to </span>
-                            <input type="number" className='filter-input' name='toPrice' value={formValues.toPrice} />
+                            <input onChange={onChangeForm} type="number" className='filter-input' name='toPrice' value={formValues.toPrice} />
                         </label>
                     </div>
                     <div className='advanced-label-box'>
                         <label>
                             <p className='filter-title'>Year of issue</p>
                             <span>from </span>
-                            <input type="number" className='filter-input' name='fromYear' value={formValues.fromYear} />
+                            <input onChange={onChangeForm} type="number" className='filter-input' name='fromYear' value={formValues.fromYear} />
                             <span>to </span>
-                            <input type="number" className='filter-input' name='toYear' value={formValues.toYear} />
+                            <input onChange={onChangeForm} type="number" className='filter-input' name='toYear' value={formValues.toYear} />
                         </label>
                     </div>
                 </div>
